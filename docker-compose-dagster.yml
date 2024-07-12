@@ -1,0 +1,74 @@
+version: "3.9"
+services:
+# Pipelines
+  etl_pipeline:
+    build:
+      context: ./etl_pipeline
+      dockerfile: ./Dockerfile
+    container_name: etl_pipeline
+    image: etl_pipeline:latest
+    volumes:
+      - ./etl_pipeline:/opt/dagster/app
+    env_file:
+    - env
+    networks:
+    - dagster_network
+
+  psql:
+    image: postgres:15
+    container_name: psql
+    ports:
+      - "5433:5432"
+    env_file:
+      - env
+    networks:
+      - dagster_network
+# Dagster
+  dagster:
+    build:
+      context: ./dagster/
+    container_name: dagster
+    image: dagster
+
+  dagster_dagit:
+    image: dagster:latest
+    entrypoint:
+      - dagit
+      - -h
+      - "0.0.0.0"
+      - -p
+      - "3001"
+      - -w
+      - workspace.yml
+    container_name: dagster_dagit
+    expose:
+      - "3001"
+    ports:
+      - "3001:3001"
+    volumes: # Make docker client accessible so we can terminate
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - env
+    networks:
+      - dagster_network
+
+  dagster_daemon:
+    image: dagster:latest
+    entrypoint:
+      - dagster-daemon
+      - run
+      - -w
+      - workspace.yml
+    container_name: dagster_daemon
+    volumes: # Make docker client accessible so we can launch
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dagster_home:/opt/dagster/dagster_home
+    env_file:
+      - env
+    networks:
+      - dagster_network
+
+networks:
+  dagster_network:
+    driver: bridge
+    name: dagster_network

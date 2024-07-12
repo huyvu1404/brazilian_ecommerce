@@ -1,0 +1,9 @@
+dagster 
+dagster-webserver 
+dagit
+dagster-postgres 
+SQLAlchemy
+pandas 
+minio 
+mysql-connector-python
+psycopg2-binary
