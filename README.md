@@ -1,4 +1,4 @@
-#Brazilian Ecommerce ETL Data Pipeline Project
+# Brazilian Ecommerce ETL Data Pipeline Project
 
 1. Extract data from MySQL database.
 2. Transform data using Pandas, data are also stored in Minio bucket.
