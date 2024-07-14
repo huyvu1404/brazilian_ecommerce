@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+from io import BytesIO, StringIO
 from dagster import IOManager, OutputContext, InputContext
 from minio import Minio
 from minio.error import S3Error
@@ -21,24 +22,16 @@ class MinIOIOManager(IOManager):
         file_name = context.asset_key.path[-1]
         
         object_name = f"{file_name}.csv"
-        data_directory = os.path.join(os.getcwd(), 'data')
-
-        if not os.path.exists(data_directory):
-            os.makedirs(data_directory)
-        
-        local_path = os.path.join(
-                data_directory, 
-                object_name
-        )
-        context.log.info(f'object_name: {context.asset_key}')        
+        csv_bytes = obj.to_csv(index=False).encode('utf-8')
+        csv_buffer = BytesIO(csv_bytes)
+        context.log.info(f'file_length: {len(csv_bytes)}')        
         try:
-
-            obj.to_csv(local_path, index=False)
-            
-            self._client.fput_object(
+            self._client.put_object(
                 bucket_name, 
                 object_name, 
-                local_path
+                data=csv_buffer,
+                length=len(csv_bytes),
+                content_type='application/csv'
             )
             
         except S3Error as e:
@@ -50,25 +43,19 @@ class MinIOIOManager(IOManager):
         file_name = context.asset_key.path[-1]
 
         object_name = f"{file_name}.csv"
-        data_directory = os.path.join(os.getcwd(), 'data')
 
-        if not os.path.exists(data_directory):
-            os.makedirs(data_directory)
-        object_name = f"{file_name}.csv"
-        
-        local_path = os.path.join(
-                data_directory, 
-                object_name
-        ) 
         try:
            
-            self._client.fget_object(
+            response = self._client.get_object(
                 bucket_name, 
-                object_name, 
-                local_path)
-            
-            return pd.read_csv(local_path)
+                object_name)
+            data = response.data.decode("utf-8")
+            data = StringIO(data)
+            return pd.read_csv(data)
         
         except S3Error as e:
             context.log.error(f"Error downloading from MinIO: {e}")
             return pd.DataFrame()
+        finally:
+            response.close()
+            response.release_conn()
