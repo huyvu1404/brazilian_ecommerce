@@ -25,8 +25,8 @@ The "Brazilian E-commerce ETL pipelines" project focuses on building a robust ET
 - **Minio**
 ## Ochestrator:
 - **Dagster**
-## Visualize Tools:
+## Visualization Tools:
 - **Superset**
-## Containerize Tools:
+## Containerization Tools:
 - **Docker**
 
