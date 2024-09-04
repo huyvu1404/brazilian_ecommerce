@@ -5,7 +5,7 @@
 
 ## Main Tasks
 - **Data Extraction**: Extract data from MySQL and store it as assets in the bronze layer.
-- **Data Transformation**: Transform data from the bronze layer to the gold layer using Dagster.
+- **Data Transformation**: Transform data from the bronze layer to the gold layer using Pandas.
 - **Data Loading**: Load transformed data into PostgreSQL for analysis and visualization.
 - **Data Visualization**: Connect Superset to PostgreSQL and create simple charts to visualize data.
 
