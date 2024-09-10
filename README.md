@@ -1,5 +1,7 @@
 # Brazilian Ecommerce ETL Data Pipeline Project
-![Uploading image.png…]()
+
+![image](https://github.com/user-attachments/assets/9b43f4e0-ca4b-475f-be08-8fe9a994c2fb)
+
 
 ## Introduction
 "Brazilian E-commerce ETL data pipeline" project focuses on building an ETL process to handle and analyze e-commerce data from Brazil. The project involves extracting data from MySQL, processing and transforming it through various stages, and ultimately visualizing it using Superset. This pipeline ensures efficient data handling, storage, and analysis to derive meaningful insights from the e-commerce data.
