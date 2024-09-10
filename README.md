@@ -22,13 +22,16 @@
 ## Databases:
 - **MySQL**
 - **PostgreSQL**
-- **Superset**
+
 ## Object Storage:
 - **Minio**
+  
 ## Ochestrator:
 - **Dagster**
+  
 ## Visualization Tools:
 - **Superset**
+- 
 ## Containerization Tools:
 - **Docker**
 
