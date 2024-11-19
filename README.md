@@ -4,34 +4,40 @@
 
 
 ## Introduction
-"Brazilian E-commerce ETL data pipeline" project focuses on building an ETL process to handle and analyze e-commerce data from Brazil. The project involves extracting data from MySQL, processing and transforming it through various stages, and ultimately visualizing it using Superset. This pipeline ensures efficient data handling, storage, and analysis to derive meaningful insights from the e-commerce data.
+"Brazilian E-commerce ETL data pipeline" project focuses on building an ETL process to handle and analyze e-commerce data from Brazil. The project involves extracting data from MySQL, processing and transforming it through various stages, and visualizing it using Superset. 
+1. Data Extraction: Extract data from MySQL and store it as assets in the bronze layer.
+2. Data Transformation: Transform data using Pandas.
+3. Data Loading: Load transformed data into PostgreSQL.
+4. Data Visualization: Connect Superset to PostgreSQL and create simple charts to visualize data.
 
-## Main Tasks
-- **Data Extraction**: Extract data from MySQL and store it as assets in the bronze layer.
-- **Data Transformation**: Transform data from the bronze layer to the gold layer using Pandas.
-- **Data Loading**: Load transformed data into PostgreSQL for analysis and visualization.
-- **Data Visualization**: Connect Superset to PostgreSQL and create simple charts to visualize data.
 
-## Languages:
-- **Python**
-## Packages:
-- **Pandas**
-- **SQLAlchemy & MySQL Connector & Psycopg2**
-- **Minio**
+## Deployment
 
-## Databases:
-- **MySQL**
-- **PostgreSQL**
+ First, start MinIO, MySQL, and PostgreSQL containers. In this process, raw data are also uploaded into MySQL.
 
-## Object Storage:
-- **Minio**
-  
-## Ochestrator:
-- **Dagster**
-  
-## Visualization Tools:
-- **Superset**
-  
-## Containerization Tools:
-- **Docker**
+``` bash
+  docker-compose -f docker-compose-storage.yml up -d
+```
+Start Dagster container and materialize all assets in Dagster UI.
+``` bash
+  docker-compose -f docker-compose-dagster.yml up -d
+```
+Start Superset container. Go to Superset UI, connect to PostgreSQL databases, and create some charts.
+``` bash
+  docker-compose -f docker-compose-superset.yml up -d
+```
+
+
+## Tech Stack
+
+**Data Processing:** Python
+
+**Database and Data Storage:** MySQL, PostgreSQL, MinIO
+
+**Ochestration:** Dagster
+
+**Visualization:** Superset
+
+**Containerization:** Docker
+
 
