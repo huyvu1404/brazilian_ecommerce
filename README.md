@@ -13,16 +13,16 @@
 
 ## Deployment
 
- First, start MinIO, MySQL, and PostgreSQL containers. In this process, raw data are also uploaded into MySQL.
+First, start the MinIO, MySQL, and PostgreSQL containers. During this process, raw data is also uploaded to MySQL
 
 ``` bash
   docker-compose -f docker-compose-storage.yml up -d
 ```
-Start Dagster container and materialize all assets in Dagster UI.
+Start Dagster container and materialize all assets through the Dagster UI.
 ``` bash
   docker-compose -f docker-compose-dagster.yml up -d
 ```
-Start Superset container. Go to Superset UI, connect to PostgreSQL databases, and create some charts.
+Start Superset container. Open Superset UI, connect to the PostgreSQL databases and create charts.
 ``` bash
   docker-compose -f docker-compose-superset.yml up -d
 ```
