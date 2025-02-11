@@ -11,7 +11,7 @@
 4. Data Visualization: Connect Superset to PostgreSQL and create simple charts to visualize data.
 
 
-## Deployment
+## Setup and Execution
 
 First, start the MinIO, MySQL, and PostgreSQL containers. During this process, raw data is also uploaded to MySQL
 
