@@ -30,6 +30,9 @@ Start Dagster container and materialize all assets through the Dagster UI.
 ```
 Open your Power BI Desktop, connect to the PostgreSQL databases and create dashboard.
 
+![Uploading image.png…]()
+
+
 
 ## Tech Stack
 
