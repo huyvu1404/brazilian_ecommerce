@@ -14,6 +14,9 @@
 ## Setup and Execution
 
 Create env and .env file in your project directory and add your environment variables.
+
+Download the corresponding data into the ingest_data/data/ directory
+
 Start the MinIO, MySQL, and PostgreSQL containers. During this process, raw data is also uploaded to MySQL
 
 ``` bash
