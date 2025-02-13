@@ -40,10 +40,9 @@ import pandas as pd
     )
 def total_payments_by_customers(fact_sales, dim_customers) -> Output[pd.DataFrame]:
     
-    successful_orders = fact_sales[fact_sales['order_status'] == 'delivered']
-    successful_orders['order_purchase_timestamp'] = pd.to_datetime(successful_orders['order_purchase_timestamp']).dt.strftime("%Y")
+    # successful_orders = fact_sales[fact_sales['order_status'] == 'delivered']
+    # successful_orders['order_purchase_timestamp'] = pd.to_datetime(successful_orders['order_purchase_timestamp']).dt.strftime("%Y")
 
-    
     merge_df = pd.merge(
         fact_sales,
         dim_customers[['customer_id', 'customer_city', 'customer_state']],

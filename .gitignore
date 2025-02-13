@@ -1,0 +1,40 @@
+# Ignore Python-related files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb_checkpoints
+
+# Ignore environment & dependency files
+.env
+*.env
+venv/
+.envrc
+Pipfile.lock
+poetry.lock
+
+#  Ignore data files
+*.csv
+*.json
+*.parquet
+*.xlsx
+*.db
+
+# Ignore logs & debugging files
+logs/
+*.log
+nohup.out
+debug.log
+
+# Ignore Docker & Dagster files
+.dockerignore
+docker-compose.override.yml
+workspace.yml
+
+# Ignore compiled & OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore storage (optional)
+minio/
+mysql/

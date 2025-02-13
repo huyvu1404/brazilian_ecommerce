@@ -1,7 +1,7 @@
+import psycopg2
 import pandas as pd
 from dagster import IOManager, OutputContext, InputContext
 from sqlalchemy import create_engine
-import psycopg2
 
 class PostgreSQLIOManager(IOManager):
     def __init__(self, config):
@@ -11,7 +11,7 @@ class PostgreSQLIOManager(IOManager):
         try:
             engine = create_engine(f'postgresql://{self._config["user"]}:{self._config["password"]}@{self._config["host"]}:{self._config["port"]}/{self._config["database"]}')
             with engine.connect() as conn:
-            
+                
                 obj.to_sql(
                     name = context.asset_key.path[-1], 
                     con = conn, 
@@ -40,7 +40,6 @@ class PostgreSQLIOManager(IOManager):
                     df = pd.DataFrame(rows, columns = columns)
             
                     return df
-                
                 finally:
                     cursor.close()
         except Exception as e:

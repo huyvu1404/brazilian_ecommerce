@@ -29,7 +29,7 @@ import pandas as pd
                     ],
                 "columns": [
                     "seller_id",
-                    "seller_state",
+                    "state_name",
                     "status",
                     ],
                 },
@@ -60,7 +60,7 @@ def seller_status(fact_sales, dim_sellers) -> Output[pd.DataFrame]:
     daily_sales_products['year'] = daily_sales_products['daily'].dt.strftime("%Y")
 
     merge_df = pd.merge(
-        dim_sellers[['seller_id', 'seller_city', 'seller_state']],
+        dim_sellers[['seller_id', 'seller_city', 'state_name']],
         daily_sales_products,
         on='seller_id',
         how='left'

@@ -13,6 +13,9 @@ import pandas as pd
     "bronze_olist_sellers_dataset": AssetIn(
         key_prefix=["bronze_layer"],
         ),
+    "bronze_state_name": AssetIn(
+        key_prefix=["bronze_layer"],
+        )
     },
     outs={
         "dim_sellers": AssetOut(
@@ -24,11 +27,20 @@ import pandas as pd
     group_name = 'silver',
     retry_policy=RetryPolicy(max_retries=3)
 )
-def dim_sellers(bronze_olist_sellers_dataset) -> Output[pd.DataFrame]:
-    selected_df = bronze_olist_sellers_dataset[[
+def dim_sellers(bronze_olist_sellers_dataset, bronze_state_name) -> Output[pd.DataFrame]:
+    merge_df = pd.merge(
+            bronze_olist_sellers_dataset, 
+            bronze_state_name, 
+            left_on='seller_state', 
+            right_on='state_id',
+            how='inner'
+        )
+    selected_df = merge_df[[
              'seller_id', 
              'seller_city',
-             'seller_state'
+             'state_name',
+             'seller_zip_code_prefix',
+
          ]]
     return Output(
         selected_df,

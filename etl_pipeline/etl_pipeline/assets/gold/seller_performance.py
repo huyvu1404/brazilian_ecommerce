@@ -28,7 +28,7 @@ import pandas as pd
                     "seller_id",
                     ],
                 "columns": [
-                    "seller_state",
+                    "state_name",
                     "seller_city",
                     'total_sales',
                     'total_bills',
@@ -44,7 +44,6 @@ import pandas as pd
 def seller_performance(fact_sales, dim_sellers) -> Output[pd.DataFrame]:
     
     successful_orders = fact_sales[fact_sales['order_status'] == 'delivered']
-    
     successful_orders['order_purchase_timestamp'] = pd.to_datetime(successful_orders['order_purchase_timestamp']).dt.date
     
     daily_sales_products = successful_orders.groupby([
@@ -65,12 +64,12 @@ def seller_performance(fact_sales, dim_sellers) -> Output[pd.DataFrame]:
 
     merge_df = pd.merge(
         daily_sales_products,
-        dim_sellers[['seller_id', 'seller_city', 'seller_state']],
+        dim_sellers[['seller_id', 'seller_city', 'state_name']],
         on='seller_id',
         how='inner'
     )
 
-    grouped_df = merge_df.groupby(['year', 'seller_id', 'seller_city', 'seller_state']).agg({
+    grouped_df = merge_df.groupby(['year', 'seller_id', 'seller_city', 'state_name']).agg({
         'sales': 'sum',
         'bills': 'sum'
     }).reset_index()
@@ -83,7 +82,7 @@ def seller_performance(fact_sales, dim_sellers) -> Output[pd.DataFrame]:
     seller_performance = grouped_df[[
         'year', 
         'seller_id', 
-        'seller_state', 
+        'state_name', 
         'seller_city', 
         'total_sales',
         'total_bills', 

@@ -20,7 +20,7 @@ storage:
       hostname: host.docker.internal
       db_name:
         env: DAGSTER_PG_DB
-      port: 5433
+      port: 5434
       
 run_launcher:
   module: dagster.core.launcher

@@ -1,7 +1,5 @@
 
 x-superset-image: &superset-image apachesuperset.docker.scarf.sh/apache/superset:${TAG:-latest-dev}
-
-version: "3.9"
 services:
 
   superset:
