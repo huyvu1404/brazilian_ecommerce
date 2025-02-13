@@ -13,7 +13,8 @@
 
 ## Setup and Execution
 
-First, start the MinIO, MySQL, and PostgreSQL containers. During this process, raw data is also uploaded to MySQL
+Create env and .env file in your project directory and add your environment variables.
+Start the MinIO, MySQL, and PostgreSQL containers. During this process, raw data is also uploaded to MySQL
 
 ``` bash
   docker-compose -f docker-compose-storage.yml build
