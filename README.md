@@ -4,7 +4,7 @@
 
 
 ## Introduction
-"Brazilian E-commerce ETL data pipeline" project focuses on building an ETL process to handle and analyze e-commerce data from Brazil. The project involves extracting data from MySQL, processing and transforming it through various stages, and visualizing it using Superset. 
+"Brazilian E-commerce ETL data pipeline" project focuses on building an ETL process to handle and analyze e-commerce data from Brazil. The project involves extracting data from MySQL, processing and transforming it through various stages, and visualizing it using Power BI. 
 1. Data Extraction: Extract data from MySQL and store it as assets in the bronze layer.
 2. Data Transformation: Transform data using Pandas.
 3. Data Loading: Load transformed data into PostgreSQL.
